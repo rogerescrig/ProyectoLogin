@@ -3,6 +3,11 @@ const { sequelize } = require('../db_connection/db_connection');
 
 
 const Tareas = sequelize.define('Tareas', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+},
   name: {
     type: DataTypes.STRING,
     allowNull: false
@@ -15,6 +20,4 @@ const Tareas = sequelize.define('Tareas', {
   },);
 
 
-module.exports = {
-    Tareas
-  };
+module.exports = Tareas
