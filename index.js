@@ -1,13 +1,10 @@
 const express = require('express');
 const { sequelize } = require('./db_connection/db_connection');
 const app = express();
-const port = 3001;
-const Tareas = require('./Models/TareasModel'); 
-const Usuarios = require('./Models/UserModel');
+const port = 3000;
 
 const cors = require("cors");
-/* app.use(express.urlencoded({ extended: false }));
-app.use(express.json()); */
+
 app.use(
   express.urlencoded({
     extended: true,
@@ -19,14 +16,22 @@ app.use(express.json({limit: '50mb'}));
  
 app.use(cors());
 
+const routerAuth = require('./Routes/UserRouter');
+const routerTareas = require('./Routes/TareasRouter');
+
+app.use('/api',routerTareas);
+app.use('/auth',routerAuth);
+
+
+
 async function dbConnect(){
   try {
-  await sequelize.sync({force: true});
+  await sequelize.sync({force: false});
   console.log('Conexion a la base de datos')
   app.listen(port,"0.0.0.0");
   console.log('Server running:', port);
- await Usuarios.sync({force:true});
- await Tareas.sync({force:true});
+ //await Usuarios.sync({force:true});
+ //await Tareas.sync({force:true});
 
 
   } catch (error) {
