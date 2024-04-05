@@ -2,12 +2,9 @@ const express = require('express');
 const { sequelize } = require('./db_connection/db_connection');
 const app = express();
 const port = 3000;
-const Tareas = require('./Models/TareasModel'); 
-const Usuarios = require('./Models/UserModel');
 
 const cors = require("cors");
-/* app.use(express.urlencoded({ extended: false }));
-app.use(express.json()); */
+
 app.use(
   express.urlencoded({
     extended: true,
@@ -24,6 +21,7 @@ const routerTareas = require('./Routes/TareasRouter');
 
 app.use('/api',routerTareas);
 app.use('/auth',routerAuth);
+
 
 
 async function dbConnect(){

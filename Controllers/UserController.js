@@ -2,10 +2,11 @@ const Usuario = require("./../Models/UserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const env = require('../config/token');
 
 dotenv.config();
 
-
+process.env.TOKEN_SECRET;
 //  Registrar Usuarios (POST)
 const register = async (req, res) => {
   try {
@@ -40,7 +41,7 @@ const login = async (req, res)=>{
      const password_valid =  bcrypt.compareSync(req.body.password,user.password);
      console.log(password_valid);
      if(password_valid){
-         token = jwt.sign({"correo" : user.correo,"nombre":user.nombre },"Holavuyv");
+         token = jwt.sign({"correo" : user.correo,"nombre":user.nombre },env.secret);
          res.status(200).json({ token : token , user: user});
      } else {
        res.status(400).json({ error : "Contraseña Incorrecta" });
@@ -51,6 +52,8 @@ const login = async (req, res)=>{
    }
    
 }
+   
+
 
 //  METODO GET
   

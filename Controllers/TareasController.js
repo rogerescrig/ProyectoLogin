@@ -1,6 +1,5 @@
 const Tareas = require('./../Models/TareasModel');
 
-
 //  REGISTRAR TAREAS
 const post = async (req, res) => {
     try {  
