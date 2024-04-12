@@ -24,7 +24,6 @@ const post = async (req, res) => {
     }
   };
 
-//  METODO GET
   
 const getTareas = async function (req, res){
     try{
